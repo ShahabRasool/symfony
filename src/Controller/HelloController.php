@@ -1,13 +1,14 @@
 <?php
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\component\Routing\Attribute\Route;
 
-class HelloController{
+class HelloController extends AbstractController{
     #[Route('/welcome/{name}', name: "welcomeRouter")] 
     public function welcome( string $name){
-        return new Response('Welcome to Symfony ' . $name );
+        return $this->render('hello/welcome.html.twig' , ['name'=>$name]);
     }
 
     #[Route('/inform')]
