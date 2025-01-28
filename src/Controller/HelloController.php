@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Repository\StudentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\component\Routing\Attribute\Route;
@@ -24,5 +25,12 @@ class HelloController extends AbstractController{
         $result =$a * $b;
         return new Response('The result will be ' .$result);
         }   
+
+
+        #[Route('/getstudent')]
+        public function getstudent(StudentRepository $studentsRepo){
+            $students =$studentsRepo->getStudents();
+            return $this->render('hello/getstudent.html.twig',['students'=>$students]);
+            }
 }
 ?>
