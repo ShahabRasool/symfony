@@ -11,9 +11,9 @@ class HelloController extends AbstractController{
         return $this->render('hello/welcome.html.twig' , ['name'=>$name]);
     }
 
-    #[Route('/inform')]
+    #[Route('/inform-us', name: "inform")]
     public function inform(){
-        return new Response('This is a Symfony project');
+        return $this->render('hello/inform.html.twig');
         }
 
      
