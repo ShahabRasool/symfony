@@ -4,6 +4,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\component\Routing\Attribute\Route;
+use Psr\Log\LoggerInterface;
 
 class HelloController extends AbstractController{
     #[Route('/welcome/{name}', name: "welcomeRouter")] 
@@ -12,7 +13,8 @@ class HelloController extends AbstractController{
     }
 
     #[Route('/inform-us', name: "inform")]
-    public function inform(){
+    public function inform(LoggerInterface $logger){
+        $logger->info('This is an info message');
         return $this->render('hello/inform.html.twig');
         }
 
