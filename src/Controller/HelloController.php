@@ -9,13 +9,13 @@ use Psr\Log\LoggerInterface;
 
 class HelloController extends AbstractController{
     #[Route('/welcome/{name}', name: "welcomeRouter")] 
-    public function welcome( string $name){
+    public function welcome( string $name, StudentRepository $studentRepository){
+        $studentRepository->getStudents();
         return $this->render('hello/welcome.html.twig' , ['name'=>$name]);
     }
 
     #[Route('/inform-us', name: "inform")]
-    public function inform(LoggerInterface $logger){
-        $logger->info('This is an info message');
+    public function inform(){
         return $this->render('hello/inform.html.twig');
         }
 
