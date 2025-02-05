@@ -1,0 +1,7 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+{% for teacher in teachers %}
+<h2 class="p-4 text-3xl text-red-500">{{ teacher.id ~ teacher.name }}</h2> </br>
+{% endfor %}
+{% endblock %}
