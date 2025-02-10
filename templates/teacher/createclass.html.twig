@@ -1,0 +1,50 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="max-w-2xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Registration of Teacher</h1>
+        {{ form_start(form, {'attr': {'class': 'space-y-4', 'novalidate': 'novalidate'}}) }}
+    <div class="text-gray-600 p-2">
+    {{form_errors(form)}}
+    </div>
+
+        <div>
+            {{ form_label(form.name, 'Full Name :', {'label_attr': {'class': 'block text-lg font-medium text-gray-700'}}) }}
+            {{ form_widget(form.name, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        </div>
+
+        <div>
+       
+            {{ form_label(form.father_name, 'Father Name :', {'label_attr': {'class': 'block text-lg font-medium text-gray-700'}}) }}
+            {{ form_widget(form.father_name, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        </div>
+
+        <div>
+             {# bg-gradient-to-r from-purple-900 to-blue-900   #}
+
+            {{ form_label(form.email, 'Email :', {'label_attr': {'class': 'block text-lg font-medium text-gray-700'}}) }}
+            {{ form_widget(form.email, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        </div>
+
+        <div>
+            {{ form_label(form.address, 'Address :', {'label_attr': {'class': 'block text-lg font-medium text-gray-700'}}) }}
+            {{ form_widget(form.address, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        </div>
+
+        <div>
+            {{ form_label(form.phone , 'Phone Number : ', {'label_attr': {'class': 'block text-lg font-medium text-gray-700'}}) }}
+            {{ form_widget(form.phone, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        </div>
+
+        <div>
+            {{ form_label(form.d_b_birth, 'Date of Birth :', {'label_attr': {'class': 'block text-lg font-medium text-gray-700'}}) }}
+            {{ form_widget(form.d_b_birth, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+        </div>
+
+        <div class="text-center mt-4">
+            {{ form_widget(form.save, {'attr': {'class': 'bg-green-500 hover:bg-green-600 text-white text-lg font-semibold px-6 py-2 rounded-lg shadow-md'}}) }}
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
