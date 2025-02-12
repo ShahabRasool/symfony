@@ -4,11 +4,12 @@
     <div class="max-w-2xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
         <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Registration of Teacher</h1>
         {{ form_start(form, {'attr': {'class': 'space-y-4', 'novalidate': 'novalidate'}}) }}
-    <div class="text-gray-600 p-2">
-    {{form_errors(form)}}
+    <div class="text-red-600 p-2">
+    {{ form_errors(form) }}
     </div>
 
         <div>
+        {{ form_errors(form.name) }}
             {{ form_label(form.name, 'Full Name :', {'label_attr': {'class': 'block text-lg font-medium text-gray-700'}}) }}
             {{ form_widget(form.name, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
         </div>
