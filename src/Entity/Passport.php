@@ -15,6 +15,10 @@ class Passport
 
     #[ORM\Column(length: 255)]
     private ?string $passnum = null;
+    // owing side is the one which has the foriegn key
+    #[ORM\OneToOne(inversedBy: 'passport', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?citizen $citizen = null;
 
     public function getId(): ?int
     {
@@ -29,6 +33,18 @@ class Passport
     public function setPassnum(string $passnum): static
     {
         $this->passnum = $passnum;
+
+        return $this;
+    }
+
+    public function getCitizen(): ?citizen
+    {
+        return $this->citizen;
+    }
+
+    public function setCitizen(citizen $citizen): static
+    {
+        $this->citizen = $citizen;
 
         return $this;
     }

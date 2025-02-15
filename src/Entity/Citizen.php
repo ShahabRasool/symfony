@@ -25,6 +25,9 @@ class Citizen
     #[ORM\Column(length: 255)]
     private ?string $address = null;
 
+    #[ORM\OneToOne(mappedBy: 'citizen', cascade: ['persist', 'remove'])]
+    private ?Passport $passport = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,23 @@ class Citizen
     public function setAddress(string $address): static
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function getPassport(): ?Passport
+    {
+        return $this->passport;
+    }
+
+    public function setPassport(Passport $passport): static
+    {
+        // set the owning side of the relation if necessary
+        if ($passport->getCitizen() !== $this) {
+            $passport->setCitizen($this);
+        }
+
+        $this->passport = $passport;
 
         return $this;
     }
