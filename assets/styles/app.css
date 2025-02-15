@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-    background-color: skyblue;
+    /* background-color: skyblue; */
     
     img{
         width: 200px;
