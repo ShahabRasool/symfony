@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Citizen index{% endblock %}
+
+{% block body %}
+    <h1>Citizen index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Fathername</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for citizen in citizens %}
+            <tr>
+                <td>{{ citizen.id }}</td>
+                <td>{{ citizen.name }}</td>
+                <td>{{ citizen.fathername }}</td>
+                <td>{{ citizen.email }}</td>
+                <td>{{ citizen.address }}</td>
+                <td>
+                    <a href="{{ path('app_citizen_show', {'id': citizen.id}) }}">show</a>
+                    <a href="{{ path('app_citizen_edit', {'id': citizen.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_citizen_new') }}">Create new</a>
+{% endblock %}

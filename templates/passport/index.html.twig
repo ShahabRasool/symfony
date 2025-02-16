@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Passport index{% endblock %}
+
+{% block body %}
+    <h1>Passport index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Passnum</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for passport in passports %}
+            <tr>
+                <td>{{ passport.id }}</td>
+                <td>{{ passport.passnum }}</td>
+                <td>
+                    <a href="{{ path('app_passport_show', {'id': passport.id}) }}">show</a>
+                    <a href="{{ path('app_passport_edit', {'id': passport.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_passport_new') }}">Create new</a>
+{% endblock %}
