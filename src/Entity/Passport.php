@@ -18,7 +18,7 @@ class Passport
     // owing side is the one which has the foriegn key
     #[ORM\OneToOne(inversedBy: 'passport', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?citizen $citizen = null;
+    private ?Citizen $Citizen = null;
 
     public function getId(): ?int
     {
@@ -39,12 +39,12 @@ class Passport
 
     public function getCitizen(): ?citizen
     {
-        return $this->citizen;
+        return $this->Citizen;
     }
 
-    public function setCitizen(citizen $citizen): static
+    public function setCitizen(citizen $Citizen): static
     {
-        $this->citizen = $citizen;
+        $this->Citizen = $Citizen;
 
         return $this;
     }

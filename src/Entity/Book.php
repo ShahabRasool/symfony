@@ -21,7 +21,12 @@ class Book
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $published = null;
+    // private ?string $published = null;
+    private ?\DateTimeImmutable $published = null;
+
+
+    #[ORM\ManyToOne(inversedBy: 'books')]
+    private ?Author $author = null;
 
     public function getId(): ?int
     {
@@ -52,14 +57,26 @@ class Book
         return $this;
     }
 
-    public function getPublished(): ?string
+    public function getPublished(): ?\DateTimeImmutable
     {
         return $this->published;
     }
 
-    public function setPublished(string $published): static
+    public function setPublished(\DateTimeImmutable $published): static
     {
         $this->published = $published;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?Author
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?Author $author): static
+    {
+        $this->author = $author;
 
         return $this;
     }

@@ -40,4 +40,19 @@ class AuthorRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function getAllByDQL(){
+        $dql = $this->getEntityManager()->createQuery("select author from \App\Entity\Author as author ");
+        return $dql->getResult();
+    }
+
+    public function getAllByDQLQB(){
+        // $dql = $this->getEntityManager()->createQuery("select author from \App\Entity\Author as author ");
+        return $this->createQueryBuilder('author')
+        ->addSelect('book')
+        ->leftJoin('author.books','book')
+        ->addOrderBy('author.id', 'DESC')
+        ->getQuery()
+        ->getResult();
+    }
 }
