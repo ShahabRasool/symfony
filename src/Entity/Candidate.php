@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CandidateRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CandidateRepository::class)]
@@ -24,6 +26,24 @@ class Candidate
 
     #[ORM\Column(length: 255)]
     private ?string $address = null;
+
+    /**
+     * @var Collection<int, Job>
+     */
+    #[ORM\ManyToMany(targetEntity: Job::class, mappedBy: 'candidate')]
+    private Collection $jobs;
+
+    /**
+     * @var Collection<int, JobApplication>
+     */
+    #[ORM\OneToMany(targetEntity: JobApplication::class, mappedBy: 'candidate')]
+    private Collection $jobApplications;
+
+    public function __construct()
+    {
+        $this->jobs = new ArrayCollection();
+        $this->jobApplications = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -74,6 +94,63 @@ class Candidate
     public function setAddress(string $address): static
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Job>
+     */
+    public function getJobs(): Collection
+    {
+        return $this->jobs;
+    }
+
+    public function addJob(Job $job): static
+    {
+        if (!$this->jobs->contains($job)) {
+            $this->jobs->add($job);
+            $job->addCandidate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJob(Job $job): static
+    {
+        if ($this->jobs->removeElement($job)) {
+            $job->removeCandidate($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, JobApplication>
+     */
+    public function getJobApplications(): Collection
+    {
+        return $this->jobApplications;
+    }
+
+    public function addJobApplication(JobApplication $jobApplication): static
+    {
+        if (!$this->jobApplications->contains($jobApplication)) {
+            $this->jobApplications->add($jobApplication);
+            $jobApplication->setCandidate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJobApplication(JobApplication $jobApplication): static
+    {
+        if ($this->jobApplications->removeElement($jobApplication)) {
+            // set the owning side to null (unless already changed)
+            if ($jobApplication->getCandidate() === $this) {
+                $jobApplication->setCandidate(null);
+            }
+        }
 
         return $this;
     }
