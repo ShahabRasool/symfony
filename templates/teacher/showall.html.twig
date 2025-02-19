@@ -2,9 +2,22 @@
 
 {% block body %}
 {% for message in app.flashes('success') %}
+
 <h2 class="text-3xl text-black font-bold p-2">{{message | raw}}</h2>
 {% endfor %}
+
+Page {{teachers.currentPage}} of {{teachers.nbPages}} out of all the {{teachers.nbResults}} record
 {% for teacher in teachers %}
 <h2 class="p-4 text-3xl text-red-500">{{ teacher.id ~ teacher.name }}</h2> </br>
 {% endfor %}
+{% if teachers.haveToPaginate() %}
+    {% if teachers.hasPreviousPage() %}
+        <a href="{{ path('teacher_showall', {'page': teachers.getPreviousPage()}) }}">Previous</a>
+    {% endif %}
+    
+    {% if teachers.hasNextPage() %}
+        <a href="{{ path('teacher_showall', {'page': teachers.getNextPage()}) }}">Next</a>
+    {% endif %}
+{% endif %}
+
 {% endblock %}

@@ -19,8 +19,10 @@ use Symfony\component\Routing\Attribute\Route;
 class TeacherController extends AbstractController{
 
     #[Route('/showall', name: "teacher_showall")]
-    public function showall(TeacherRepository $teacherRepository){
-        $teachers = $teacherRepository->findAll();
+    public function showall(TeacherRepository $teacherRepository, Request $request){
+        $teachers = $teacherRepository->findAllwithPaginationSupport();
+        $teachers->setMaxPerPage(2);
+        $teachers->setCurrentPage($request->query->get('page',1));
         return $this->render('teacher/showall.html.twig', ['teachers' => $teachers]);
         }
 

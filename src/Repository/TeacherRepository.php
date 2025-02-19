@@ -6,6 +6,8 @@ use App\Entity\Teacher;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+use Pagerfanta\Pagerfanta;
 
 /**
  * @extends ServiceEntityRepository<Teacher>
@@ -51,4 +53,9 @@ class TeacherRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+    public function findAllwithPaginationSupport(){
+        $query = $this->createQueryBuilder('teacher')
+        ->getQuery();
+        return new Pagerfanta(new QueryAdapter($query));
+    }
 }

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Papers{% endblock %}
+
+{% block body %}
+    <h1>Papers</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ paper.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ paper.title }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ paper.slug }}</td>
+            </tr>
+            <tr>
+                <th>CreateAt</th>
+                <td>{{ paper.createAt ? paper.createAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdateAt</th>
+                <td>{{ paper.updateAt ? paper.updateAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_papers_index') }}">back to list</a>
+
+    <a href="{{ path('app_papers_edit', {'id': paper.id}) }}">edit</a>
+
+    {{ include('papers/_delete_form.html.twig') }}
+{% endblock %}

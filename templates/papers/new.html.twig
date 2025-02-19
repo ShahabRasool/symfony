@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Papers{% endblock %}
+
+{% block body %}
+    <h1>Create new Papers</h1>
+
+    {{ include('papers/_form.html.twig') }}
+
+    <a href="{{ path('app_papers_index') }}">back to list</a>
+{% endblock %}
